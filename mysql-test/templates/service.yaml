@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mysql-test.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "mysql-test.name" . }}
+    helm.sh/chart: {{ include "mysql-test.chart" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: {{ include "mysql-test.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
