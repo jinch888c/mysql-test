@@ -1,29 +1,16 @@
 version: '1.0'
 steps:
- BuildingDockerImage:
-    title: Building Docker Image
-    type: build
-    image_name: mysql-test
-    working_directory: ./
-    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
-    dockerfile: Dockerfile
- PushingToDockerRegistry:
-    title: Pushing to Docker Registry
-    type: push
-    candidate: '${{BuildingDockerImage}}'
-    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
-    registry: docker-local
  StoreChart:
     title: Storing Helm chart
     image: 'codefresh/cfstep-helm:2.9.1'
     environment:
       - ACTION=push
-      - CHART_REF=mysql-test
+      - CHART_REF=mytest
  InstallChart:
     title: Install Helm chart
     image: 'codefresh/cfstep-helm:2.9.1'
     environment:
       - ACTION=install
-      - CHART_REF=mysql-test
-      - RELEASE_NAME=mysql-test
+      - CHART_REF=mytest
+      - RELEASE_NAME=mytest
       - KUBE_CONTEXT=game
