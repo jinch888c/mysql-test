@@ -6,5 +6,5 @@ steps:
     environment:
       - ACTION=install
       - CHART_REF=mysql-test
-      - RELEASE_NAME=mysql-test-prod
+      - RELEASE_NAME=mysql-test
       - KUBE_CONTEXT=game
