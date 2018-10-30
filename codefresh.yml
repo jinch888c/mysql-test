@@ -7,19 +7,19 @@ BuildingDockerImage:
     working_directory: ./
     tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
     dockerfile: Dockerfile
-  PushingToDockerRegistry:
+PushingToDockerRegistry:
     title: Pushing to Docker Registry
     type: push
     candidate: '${{BuildingDockerImage}}'
     tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
     registry: docker-local
-  StoreChart:
+StoreChart:
     title: Storing Helm chart
     image: 'codefresh/cfstep-helm:2.9.1'
     environment:
       - ACTION=push
       - CHART_REF=mysql-test
-  InstallChart:
+InstallChart:
     title: Install Helm chart
     image: 'codefresh/cfstep-helm:2.9.1'
     environment:
